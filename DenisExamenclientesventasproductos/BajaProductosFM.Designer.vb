@@ -57,7 +57,7 @@ Partial Class BajaProductosFM
         Button1.Text = "Eliminar"
         Button1.UseVisualStyleBackColor = False
         ' 
-        ' Form7
+        ' BajaProductosFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -66,7 +66,7 @@ Partial Class BajaProductosFM
         Controls.Add(Button1)
         Controls.Add(TextBox1)
         Controls.Add(Label1)
-        Name = "Form7"
+        Name = "BajaProductosFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "BajadeProductos"
         ResumeLayout(False)

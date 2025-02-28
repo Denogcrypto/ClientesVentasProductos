@@ -128,7 +128,7 @@ Partial Class ModificarProductosFM
         TextBoxIDProductos.Size = New Size(100, 23)
         TextBoxIDProductos.TabIndex = 9
         ' 
-        ' Form13
+        ' ModificarProductosFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -144,7 +144,7 @@ Partial Class ModificarProductosFM
         Controls.Add(Label2)
         Controls.Add(Label1)
         Controls.Add(BotonModificarProductos)
-        Name = "Form13"
+        Name = "ModificarProductosFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "ModificarProductos"
         ResumeLayout(False)

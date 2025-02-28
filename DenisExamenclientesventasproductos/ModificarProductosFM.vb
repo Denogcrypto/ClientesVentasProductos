@@ -4,7 +4,7 @@ Imports MongoDB.Driver.Core.Configuration
 Imports MySql.Data.MySqlClient
 
 Public Class ModificarProductosFM
-    'Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BotonModificarProductos.Click
         Dim ID As Integer
 
@@ -42,5 +42,7 @@ Public Class ModificarProductosFM
 
     End Sub
 
+    Private Sub ModificarProductosFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

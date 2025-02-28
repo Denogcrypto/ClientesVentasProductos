@@ -1,7 +1,7 @@
-﻿Imports MySql.Data.MySqlClient
-
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 Public Class EditarVentaFM
-    Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
     Private ventaID As Integer
 
     ' Constructor que recibe el ID de la venta

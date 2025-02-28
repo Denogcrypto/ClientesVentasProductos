@@ -1,8 +1,9 @@
-﻿Imports ClosedXML.Excel
+﻿Imports System.Configuration
+Imports ClosedXML.Excel
 Imports MySql.Data.MySqlClient
 
 Public Class ReporteFM
-    Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
 
     ' Método para generar el reporte de ventas
     Private Sub GenerarReporteVentas()
@@ -98,5 +99,9 @@ Public Class ReporteFM
     ' Evento del botón para generar el reporte de productos
     Private Sub ButtonGenerarReporteProductos_Click(sender As Object, e As EventArgs) Handles ButtonGenerarReporteProductos.Click
         GenerarReporteProductos()
+    End Sub
+
+    Private Sub ReporteFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

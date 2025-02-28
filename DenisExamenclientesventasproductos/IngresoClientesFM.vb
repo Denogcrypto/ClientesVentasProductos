@@ -17,7 +17,7 @@ Public Class IngresoClientesFM
 
 
     ' Cadena de conexión, ajusta según tu configuración
-    ' Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+
 
 
 

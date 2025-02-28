@@ -30,5 +30,7 @@ Public Class BajaProductosFM
 
     End Sub
 
+    Private Sub BajaProductosFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

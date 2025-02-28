@@ -31,7 +31,7 @@ Public Class BajaClientesFM
 
     End Sub
 
+    Private Sub BajaClientesFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
+    End Sub
 End Class

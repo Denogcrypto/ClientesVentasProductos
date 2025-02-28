@@ -1,8 +1,8 @@
-﻿
+﻿Imports System.Configuration
 Imports MySql.Data.MySqlClient
 
     Public Class ModificarVentasFM
-        Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+        Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
 
         Private Sub ModificarVentasFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             CargarVentas()

@@ -1,8 +1,9 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 
 Public Class VentasDB
-    Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
 
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
     ' Método para obtener todas las ventas
     Public Function ObtenerVentas() As DataTable
         Dim table As New DataTable()

@@ -1,7 +1,8 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 
 Public Class BuscarProductosFM
-    Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Pwd=dennis;"
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
 
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Agregar elementos al ComboBox

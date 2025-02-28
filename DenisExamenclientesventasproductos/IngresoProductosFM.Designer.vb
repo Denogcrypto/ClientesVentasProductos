@@ -117,7 +117,7 @@ Partial Class IngresoProductosFM
         Button1.Text = "Ingresar Datos"
         Button1.UseVisualStyleBackColor = False
         ' 
-        ' Form6
+        ' IngresoProductosFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -132,7 +132,7 @@ Partial Class IngresoProductosFM
         Controls.Add(Label2)
         Controls.Add(TextBox1)
         Controls.Add(Label1)
-        Name = "Form6"
+        Name = "IngresoProductosFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "IngresodeProductos"
         ResumeLayout(False)

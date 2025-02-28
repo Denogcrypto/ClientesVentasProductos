@@ -5,7 +5,7 @@ Imports Mysqlx.XDevAPI
 Public Class IngresoProductosFM
 
     ' Cadena de conexión, ajusta según tu configuración
-    ' Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ' Obtén los datos de los TextBox
@@ -42,5 +42,7 @@ Public Class IngresoProductosFM
 
     End Sub
 
+    Private Sub IngresoProductosFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

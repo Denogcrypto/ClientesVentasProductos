@@ -89,7 +89,7 @@ Partial Class MenuClientes
         Label1.TabIndex = 7
         Label1.Text = "Menu Clientes"
         ' 
-        ' Form2
+        ' MenuClientes
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -100,7 +100,7 @@ Partial Class MenuClientes
         Controls.Add(Button3)
         Controls.Add(Button2)
         Controls.Add(Button1)
-        Name = "Form2"
+        Name = "MenuClientes"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Menuclientes"
         ResumeLayout(False)

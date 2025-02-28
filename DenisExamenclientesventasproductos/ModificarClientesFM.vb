@@ -3,7 +3,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class ModificarClientesFM
 
-    'Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
+
     Private Function EsEmailValido(email As String) As Boolean
         ' Expresión regular para validar un correo electrónico
         Dim regex As New Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")

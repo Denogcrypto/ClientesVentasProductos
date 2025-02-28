@@ -24,4 +24,8 @@ Public Class MenuClientes
         Dim Buscarclientes As New BuscarClientesFM()
         Buscarclientes.Show()
     End Sub
+
+    Private Sub MenuClientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
