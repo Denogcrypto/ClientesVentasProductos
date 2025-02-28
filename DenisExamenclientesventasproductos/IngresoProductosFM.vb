@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 Imports Mysqlx.XDevAPI
 
-Public Class Form6
+Public Class IngresoProductosFM
 
     ' Cadena de conexión, ajusta según tu configuración
     ' Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"

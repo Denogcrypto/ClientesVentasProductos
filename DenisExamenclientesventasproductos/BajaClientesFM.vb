@@ -5,13 +5,13 @@ Imports Mysqlx.XDevAPI
 
 
 
-Public Class Form4
+Public Class BajaClientesFM
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ' Obtén los datos de los TextBox
         Dim Elimclient As New Cliente(
-           TextBox1.Text   'id
+           TextBox1.Text 'id
           )
 
         ' Validar que el ID sea un número
@@ -30,5 +30,8 @@ Public Class Form4
 
 
     End Sub
+
+
+
 
 End Class

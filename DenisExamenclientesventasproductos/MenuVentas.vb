@@ -1,4 +1,4 @@
-﻿Public Class Form11
+﻿Public Class MenuVentas
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim IngresoVentass As New AgregarVentasFM()
         IngresoVentass.Show()

@@ -2,7 +2,7 @@
 Imports MongoDB.Driver.Core.Configuration
 Imports MySql.Data.MySqlClient
 
-Public Class Form7
+Public Class BajaProductosFM
 
 
 

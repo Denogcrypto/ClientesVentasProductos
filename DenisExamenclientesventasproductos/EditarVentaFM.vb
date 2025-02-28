@@ -36,9 +36,13 @@ Public Class EditarVentaFM
         DataGridViewVenta.AllowUserToDeleteRows = False
         DataGridViewVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
-        ' Configurar las columnas para permitir la edición
+        ' Configurar las columnas para permitir o no la edición
         For Each column As DataGridViewColumn In DataGridViewVenta.Columns
-            column.ReadOnly = False
+            If column.Name = "ID" OrElse column.Name = "IDVenta" OrElse column.Name = "IDProducto" Then
+                column.ReadOnly = True ' Columnas de solo lectura
+            Else
+                column.ReadOnly = False ' Columnas editables
+            End If
         Next
 
         ' Suscribir al evento CellValueChanged para recalcular el PrecioTotal
@@ -76,7 +80,6 @@ Public Class EditarVentaFM
 
         ' Obtener los valores editados del DataGridView
         Dim row As DataGridViewRow = DataGridViewVenta.SelectedRows(0)
-        Dim nuevoIDProducto As Integer = Convert.ToInt32(row.Cells("IDProducto").Value)
         Dim nuevoPrecioUnitario As Decimal = Convert.ToDecimal(row.Cells("PrecioUnitario").Value)
         Dim nuevaCantidad As Integer = Convert.ToInt32(row.Cells("Cantidad").Value)
         Dim nuevoPrecioTotal As Decimal = Convert.ToDecimal(row.Cells("PrecioTotal").Value)
@@ -85,9 +88,8 @@ Public Class EditarVentaFM
             ' Actualizar el registro en la base de datos
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
-                Dim query As String = "UPDATE ventasitems SET IDProducto = @IDProducto, PrecioUnitario = @PrecioUnitario, Cantidad = @Cantidad, PrecioTotal = @PrecioTotal WHERE ID = @ID"
+                Dim query As String = "UPDATE ventasitems SET PrecioUnitario = @PrecioUnitario, Cantidad = @Cantidad, PrecioTotal = @PrecioTotal WHERE ID = @ID"
                 Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@IDProducto", nuevoIDProducto)
                     cmd.Parameters.AddWithValue("@PrecioUnitario", nuevoPrecioUnitario)
                     cmd.Parameters.AddWithValue("@Cantidad", nuevaCantidad)
                     cmd.Parameters.AddWithValue("@PrecioTotal", nuevoPrecioTotal)
@@ -101,8 +103,6 @@ Public Class EditarVentaFM
                     cmdVentas.Parameters.AddWithValue("@IDVenta", ventaID)
                     cmdVentas.ExecuteNonQuery()
                 End Using
-
-
             End Using
 
             MessageBox.Show("Registro actualizado correctamente.")

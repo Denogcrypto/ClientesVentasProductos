@@ -6,7 +6,7 @@ Imports System.Text.RegularExpressions
 
 
 
-Public Class Form3
+Public Class IngresoClientesFM
 
 
     Private Function EsEmailValido(email As String) As Boolean

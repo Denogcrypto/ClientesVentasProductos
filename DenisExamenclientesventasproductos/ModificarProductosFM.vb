@@ -3,7 +3,7 @@ Imports DocumentFormat.OpenXml.Drawing
 Imports MongoDB.Driver.Core.Configuration
 Imports MySql.Data.MySqlClient
 
-Public Class Form13
+Public Class ModificarProductosFM
     'Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BotonModificarProductos.Click
         Dim ID As Integer

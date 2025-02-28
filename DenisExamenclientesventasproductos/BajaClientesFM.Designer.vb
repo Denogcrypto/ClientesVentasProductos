@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form4
+Partial Class BajaClientesFM
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -57,7 +57,7 @@ Partial Class Form4
         Button1.Text = "Eliminar"
         Button1.UseVisualStyleBackColor = False
         ' 
-        ' Form4
+        ' BajaClientesFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -66,7 +66,7 @@ Partial Class Form4
         Controls.Add(Button1)
         Controls.Add(Label1)
         Controls.Add(TextBox1)
-        Name = "Form4"
+        Name = "BajaClientesFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "BajadeClientes"
         ResumeLayout(False)

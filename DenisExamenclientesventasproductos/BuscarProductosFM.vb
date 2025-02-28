@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class Form10
+Public Class BuscarProductosFM
     Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Pwd=dennis;"
 
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load

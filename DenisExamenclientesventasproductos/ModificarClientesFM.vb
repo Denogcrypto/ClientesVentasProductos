@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Imports MySql.Data.MySqlClient
 
-Public Class Form8
+Public Class ModificarClientesFM
 
     'Private connectionString As String = "Server=localhost;Database=pruebademo;Uid=root;Password=dennis;"
     Private Function EsEmailValido(email As String) As Boolean

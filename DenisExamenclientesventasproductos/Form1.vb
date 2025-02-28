@@ -4,12 +4,12 @@ Imports System.Configuration
 Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim clientes As New Form2()
+        Dim clientes As New MenuClientes()
         clientes.Show()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim productos As New Form5()
+        Dim productos As New MenuProductos()
         productos.Show()
     End Sub
 
@@ -33,7 +33,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim Ventas As New Form11()
+        Dim Ventas As New MenuVentas()
         Ventas.Show()
     End Sub
 
