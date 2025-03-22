@@ -1,4 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports Microsoft.Data.SqlClient
 Imports Mysqlx.XDevAPI
 Imports System.Configuration
 Imports System.Text.RegularExpressions
@@ -25,8 +25,8 @@ Public Class IngresoClientesFM
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         'validacion pára campos vacios
-        If String.IsNullOrEmpty(TextBox1.Text) OrElse
-           String.IsNullOrEmpty(TextBox2.Text) OrElse
+
+        If String.IsNullOrEmpty(TextBox2.Text) OrElse
            String.IsNullOrEmpty(TextBox3.Text) OrElse
            String.IsNullOrEmpty(TextBox4.Text) Then
             MessageBox.Show("Por favor, complete todos los campos.")
@@ -43,30 +43,28 @@ Public Class IngresoClientesFM
 
 
 
-        Dim client As New Cliente(
-            TextBox1.Text,
-            TextBox3.Text, ' Nombre
+        Dim client As New Cliente(TextBox3.Text, ' Nombre
             TextBox2.Text, ' Teléfono
-TextBox4.Text  ' Correo
+            TextBox4.Text  ' Correo
 )
 
-            ' Validar que el ID sea un número
-            If Not Integer.TryParse(TextBox1.Text, client.ID) Then
-                MessageBox.Show("Por favor, ingrese un ID válido.")
-                Return
-            End If
 
-            Dim clienteDB As New ClienteDB()
-            If clienteDB.InsertarCliente(client) Then
-                MessageBox.Show("Datos insertados correctamente.")
-            Else
-                MessageBox.Show("Error al insertar los datos.")
-            End If
+
+        Dim clienteDB As New ClienteDB()
+        If clienteDB.InsertarCliente(client) Then
+            MessageBox.Show("Datos insertados correctamente.")
+        Else
+            MessageBox.Show("Error al insertar los datos.")
+        End If
 
 
     End Sub
 
     Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 End Class

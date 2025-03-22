@@ -1,6 +1,6 @@
 ﻿Imports DocumentFormat.OpenXml.Office2010.Excel
 Imports MongoDB.Driver.Core.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class BajaProductosFM
 

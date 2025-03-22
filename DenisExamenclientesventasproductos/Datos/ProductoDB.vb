@@ -2,10 +2,10 @@
 Imports DocumentFormat.OpenXml.Office2010.Excel
 Imports MongoDB.Driver
 Imports MongoDB.Driver.Core.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Friend Class ProductoDB
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
     Public Sub New()
     End Sub
 
@@ -15,14 +15,13 @@ Friend Class ProductoDB
 
 
 
-        Dim query As String = "INSERT INTO productos (ID, Nombre, Precio, Categoria) VALUES (@ID, @Nombre, @Precio, @Categoria)"
+        Dim query As String = "INSERT INTO productos (Nombre, Precio, Categoria) VALUES (@Nombre, @Precio, @Categoria)"
 
-        Using conn As New MySqlConnection(ConnectionString)
+        Using conn As New SqlConnection(connectionString)
             Try
                 conn.Open()
-                Using cmd As New MySqlCommand(query, conn)
-                    ' Asigna los parámetros
-                    cmd.Parameters.AddWithValue("@ID", product.ID)
+                Using cmd As New SqlCommand(query, conn)
+
                     cmd.Parameters.AddWithValue("@Nombre", product.Nombre)
                     cmd.Parameters.AddWithValue("@Precio", product.Precio)
                     cmd.Parameters.AddWithValue("@Categoria", product.Categoria)
@@ -34,7 +33,7 @@ Friend Class ProductoDB
                     Return result > 0
 
                 End Using
-            Catch ex As MySqlException
+            Catch ex As SqlException
                 MessageBox.Show("Error: " & ex.Message)
                 Return False
             Finally
@@ -56,8 +55,8 @@ Friend Class ProductoDB
         ' Query para eliminar el Producto
         Dim query As String = "DELETE FROM productos WHERE Id = @Id"
 
-        Using conexion As New MySqlConnection(connectionString)
-            Using cmd As New MySqlCommand(query, conexion)
+        Using conexion As New SqlConnection(connectionString)
+            Using cmd As New SqlCommand(query, conexion)
                 ' Agregar parámetro para evitar SQL Injection
                 cmd.Parameters.AddWithValue("@Id", ElimProducto.ID)
 
@@ -91,10 +90,10 @@ Friend Class ProductoDB
         ' Consulta SQL para actualizar los datos
         Dim query As String = "UPDATE productos SET ID = @ID, Nombre = @Nombre, Precio = @Precio, Categoria = @Categoria WHERE ID = @ID"
 
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             Try
                 conn.Open()
-                Using cmd As New MySqlCommand(query, conn)
+                Using cmd As New SqlCommand(query, conn)
                     ' Asigna los parámetros
                     cmd.Parameters.AddWithValue("@ID", ModProduct.ID)
                     cmd.Parameters.AddWithValue("@Nombre", ModProduct.Nombre)
@@ -108,7 +107,7 @@ Friend Class ProductoDB
                 End Using
 
 
-            Catch ex As MySqlException
+            Catch ex As SqlException
                 MessageBox.Show("Error: " & ex.Message)
             Catch ex As Exception
                 MessageBox.Show("Error inesperado: " & ex.Message)

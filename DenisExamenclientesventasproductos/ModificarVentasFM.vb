@@ -1,29 +1,29 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
-    Public Class ModificarVentasFM
-        Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+Public Class ModificarVentasFM
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
-        Private Sub ModificarVentasFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ModificarVentasFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             CargarVentas()
         End Sub
 
         ' Método para cargar las ventas en el DataGridView
         Private Sub CargarVentas()
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "SELECT v.ID, c.Cliente, v.Fecha, v.Total FROM ventas v INNER JOIN clientes c ON v.IDCliente = c.ID"
-                Using cmd As New MySqlCommand(query, conn)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        Dim table As New DataTable()
-                        adapter.Fill(table)
-                        DataGridViewVentas.DataSource = table
-                    End Using
+        Using conn As New SqlConnection(connectionString)
+            conn.Open()
+            Dim query As String = "SELECT v.ID, c.Cliente, v.Fecha, v.Total FROM ventas v INNER JOIN clientes c ON v.IDCliente = c.ID"
+            Using cmd As New SqlCommand(query, conn)
+                Using adapter As New SqlDataAdapter(cmd)
+                    Dim table As New DataTable()
+                    adapter.Fill(table)
+                    DataGridViewVentas.DataSource = table
                 End Using
             End Using
+        End Using
 
-            ' Configurar el DataGridView
-            DataGridViewVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        ' Configurar el DataGridView
+        DataGridViewVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             DataGridViewVentas.MultiSelect = False
             DataGridViewVentas.ReadOnly = True ' Evitar edición directa
         End Sub

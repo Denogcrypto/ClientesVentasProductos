@@ -1,4 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports Microsoft.Data.SqlClient
 Imports System.Configuration
 
 Public Class Form1
@@ -15,10 +15,10 @@ Public Class Form1
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         ' Obtener la cadena de conexión desde App.config
-        Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+        Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
         ' Intentar abrir una conexión
-        Using connection As New MySqlConnection(connectionString)
+        Using connection As New SqlConnection(connectionString)
             Try
                 connection.Open()
                 MessageBox.Show("Conexión exitosa a la base de datos MySQL.")
@@ -55,9 +55,9 @@ Public Class Form1
 
     ' Método para verificar la conexión y actualizar el PictureBox
     Private Sub VerificarConexion()
-        Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+        Dim connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
-        Using connection As New MySqlConnection(connectionString)
+        Using connection As New SqlConnection(connectionString)
             Try
                 connection.Open()
                 pbEstadoConexion.Image = ByteArrayToImage(My.Resources.verde) ' Convierte Byte() a Image

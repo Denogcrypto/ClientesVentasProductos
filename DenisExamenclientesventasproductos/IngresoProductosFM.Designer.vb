@@ -22,8 +22,6 @@ Partial Class IngresoProductosFM
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Label1 = New Label()
-        TextBox1 = New TextBox()
         Label2 = New Label()
         Label3 = New Label()
         Label4 = New Label()
@@ -32,24 +30,6 @@ Partial Class IngresoProductosFM
         TextBox4 = New TextBox()
         Button1 = New Button()
         SuspendLayout()
-        ' 
-        ' Label1
-        ' 
-        Label1.Anchor = AnchorStyles.None
-        Label1.AutoSize = True
-        Label1.Location = New Point(391, 127)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(18, 15)
-        Label1.TabIndex = 0
-        Label1.Text = "ID"
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Anchor = AnchorStyles.None
-        TextBox1.Location = New Point(454, 119)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(100, 23)
-        TextBox1.TabIndex = 1
         ' 
         ' Label2
         ' 
@@ -130,17 +110,12 @@ Partial Class IngresoProductosFM
         Controls.Add(Label4)
         Controls.Add(Label3)
         Controls.Add(Label2)
-        Controls.Add(TextBox1)
-        Controls.Add(Label1)
         Name = "IngresoProductosFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "IngresodeProductos"
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label

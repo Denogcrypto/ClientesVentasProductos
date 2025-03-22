@@ -22,24 +22,14 @@ Partial Class IngresoClientesFM
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        TextBox1 = New TextBox()
         TextBox2 = New TextBox()
         TextBox3 = New TextBox()
-        Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
         Button1 = New Button()
         TextBox4 = New TextBox()
         Label4 = New Label()
         SuspendLayout()
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Anchor = AnchorStyles.None
-        TextBox1.Location = New Point(408, 117)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(100, 23)
-        TextBox1.TabIndex = 0
         ' 
         ' TextBox2
         ' 
@@ -56,16 +46,6 @@ Partial Class IngresoClientesFM
         TextBox3.Name = "TextBox3"
         TextBox3.Size = New Size(100, 23)
         TextBox3.TabIndex = 2
-        ' 
-        ' Label1
-        ' 
-        Label1.Anchor = AnchorStyles.None
-        Label1.AutoSize = True
-        Label1.Location = New Point(364, 125)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(18, 15)
-        Label1.TabIndex = 3
-        Label1.Text = "ID"
         ' 
         ' Label2
         ' 
@@ -117,7 +97,7 @@ Partial Class IngresoClientesFM
         Label4.TabIndex = 8
         Label4.Text = "Correo"
         ' 
-        ' Form3
+        ' IngresoClientesFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -128,21 +108,16 @@ Partial Class IngresoClientesFM
         Controls.Add(Button1)
         Controls.Add(Label3)
         Controls.Add(Label2)
-        Controls.Add(Label1)
         Controls.Add(TextBox3)
         Controls.Add(TextBox2)
-        Controls.Add(TextBox1)
-        Name = "Form3"
+        Name = "IngresoClientesFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "IngresodeClientes"
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Button1 As Button

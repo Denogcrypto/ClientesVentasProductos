@@ -1,5 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class ModificarClientesFM
 

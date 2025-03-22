@@ -1,7 +1,7 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 Public Class EditarVentaFM
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
     Private ventaID As Integer
 
     ' Constructor que recibe el ID de la venta
@@ -17,12 +17,12 @@ Public Class EditarVentaFM
 
     ' Método para cargar los datos de la venta seleccionada en el DataGridView
     Private Sub CargarDatosVenta()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT ID, IDVenta, IDProducto, PrecioUnitario, Cantidad, PrecioTotal FROM ventasitems WHERE IDVenta = @IDVenta"
-            Using cmd As New MySqlCommand(query, conn)
+            Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@IDVenta", ventaID)
-                Using adapter As New MySqlDataAdapter(cmd)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable()
                     adapter.Fill(table)
                     DataGridViewVenta.DataSource = table
@@ -86,10 +86,10 @@ Public Class EditarVentaFM
 
         Try
             ' Actualizar el registro en la base de datos
-            Using conn As New MySqlConnection(connectionString)
+            Using conn As New SqlConnection(connectionString)
                 conn.Open()
                 Dim query As String = "UPDATE ventasitems SET PrecioUnitario = @PrecioUnitario, Cantidad = @Cantidad, PrecioTotal = @PrecioTotal WHERE ID = @ID"
-                Using cmd As New MySqlCommand(query, conn)
+                Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@PrecioUnitario", nuevoPrecioUnitario)
                     cmd.Parameters.AddWithValue("@Cantidad", nuevaCantidad)
                     cmd.Parameters.AddWithValue("@PrecioTotal", nuevoPrecioTotal)
@@ -99,7 +99,7 @@ Public Class EditarVentaFM
 
                 ' Actualizar el total en la tabla ventas
                 Dim queryVentas As String = "UPDATE ventas SET Total = (SELECT SUM(PrecioTotal) FROM ventasitems WHERE IDVenta = @IDVenta) WHERE ID = @IDVenta"
-                Using cmdVentas As New MySqlCommand(queryVentas, conn)
+                Using cmdVentas As New SqlCommand(queryVentas, conn)
                     cmdVentas.Parameters.AddWithValue("@IDVenta", ventaID)
                     cmdVentas.ExecuteNonQuery()
                 End Using

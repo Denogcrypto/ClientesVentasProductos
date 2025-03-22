@@ -1,11 +1,12 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
+
 
 
 
 Public Class AgregarVentasFM
 
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
     Private totalGeneral As Decimal = 0
 
@@ -26,11 +27,11 @@ Public Class AgregarVentasFM
     End Sub
 
     Private Sub CargarClientes()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT ID, Cliente FROM clientes"
-            Using cmd As New MySqlCommand(query, conn)
-                Using reader As MySqlDataReader = cmd.ExecuteReader()
+            Using cmd As New SqlCommand(query, conn)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         ComboClientes.Items.Add(New With {.ID = reader("ID"), .Cliente = reader("Cliente")})
                     End While
@@ -42,11 +43,11 @@ Public Class AgregarVentasFM
     End Sub
 
     Private Sub CargarProductos()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT ID, Nombre, Precio FROM productos"
-            Using cmd As New MySqlCommand(query, conn)
-                Using reader As MySqlDataReader = cmd.ExecuteReader()
+            Using cmd As New SqlCommand(query, conn)
+                Using reader As SqlDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         ComboProductos.Items.Add(New With {.ID = reader("ID"), .Nombre = reader("Nombre"), .Precio = reader("Precio")})
                     End While
@@ -78,15 +79,15 @@ Public Class AgregarVentasFM
             Return
         End If
 
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
-            Dim transaction As MySqlTransaction = conn.BeginTransaction()
+            Dim transaction As SqlTransaction = conn.BeginTransaction()
 
             Try
                 ' Guardar la venta
                 Dim clienteID As Integer = ComboClientes.SelectedItem.ID
-                Dim queryVenta As String = "INSERT INTO ventas (IDCliente, Fecha, Total) VALUES (@IDCliente, @Fecha, @Total); SELECT LAST_INSERT_ID();"
-                Using cmdVenta As New MySqlCommand(queryVenta, conn, transaction)
+                Dim queryVenta As String = "INSERT INTO ventas (IDCliente, Fecha, Total) VALUES (@IDCliente, @Fecha, @Total); SELECT SCOPE_IDENTITY();"
+                Using cmdVenta As New SqlCommand(queryVenta, conn, transaction)
                     cmdVenta.Parameters.AddWithValue("@IDCliente", clienteID)
                     cmdVenta.Parameters.AddWithValue("@Fecha", DateTime.Now)
                     cmdVenta.Parameters.AddWithValue("@Total", totalGeneral)
@@ -98,16 +99,19 @@ Public Class AgregarVentasFM
                         Dim cantidad As Integer = row.Cells("Cantidad").Value
                         Dim precioUnitario As Decimal = row.Cells("PrecioUnitario").Value
                         Dim totalItem As Decimal = row.Cells("PrecioTotal").Value
+                        If productoID <> 0 Then
+                            Dim queryDetalle As String = "INSERT INTO ventasitems (IDVenta, IDProducto, PrecioUnitario, Cantidad, PrecioTotal) VALUES (@IDVenta, @IDProducto, @PrecioUnitario, @Cantidad, @PrecioTotal)"
+                            Using cmdDetalle As New SqlCommand(queryDetalle, conn, transaction)
+                                cmdDetalle.Parameters.AddWithValue("@IDVenta", ventaID)
+                                cmdDetalle.Parameters.AddWithValue("@IDProducto", productoID)
+                                cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", precioUnitario)
+                                cmdDetalle.Parameters.AddWithValue("@Cantidad", cantidad)
+                                cmdDetalle.Parameters.AddWithValue("@PrecioTotal", totalItem)
+                                cmdDetalle.ExecuteNonQuery()
+                            End Using
 
-                        Dim queryDetalle As String = "INSERT INTO ventasitems (IDVenta, IDProducto, PrecioUnitario, Cantidad, PrecioTotal) VALUES (@IDVenta, @IDProducto, @PrecioUnitario, @Cantidad, @PrecioTotal)"
-                        Using cmdDetalle As New MySqlCommand(queryDetalle, conn, transaction)
-                            cmdDetalle.Parameters.AddWithValue("@IDVenta", ventaID)
-                            cmdDetalle.Parameters.AddWithValue("@IDProducto", productoID)
-                            cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", precioUnitario)
-                            cmdDetalle.Parameters.AddWithValue("@Cantidad", cantidad)
-                            cmdDetalle.Parameters.AddWithValue("@PrecioTotal", totalItem)
-                            cmdDetalle.ExecuteNonQuery()
-                        End Using
+                        End If
+
                     Next
 
                     transaction.Commit()

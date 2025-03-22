@@ -1,8 +1,8 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class BuscadorVentasFM
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
     Private Sub BuscadorVentasFM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CargarClientes()
@@ -10,11 +10,11 @@ Public Class BuscadorVentasFM
 
     ' Método para cargar los clientes en el ComboBox
     Private Sub CargarClientes()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT ID, Cliente FROM clientes"
-            Using cmd As New MySqlCommand(query, conn)
-                Using adapter As New MySqlDataAdapter(cmd)
+            Using cmd As New SqlCommand(query, conn)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable()
                     adapter.Fill(table)
                     ComboClientes.DataSource = table
@@ -27,7 +27,7 @@ Public Class BuscadorVentasFM
 
     ' Método para buscar ventas con filtros
     Private Sub ButtonBuscar_Click(sender As Object, e As EventArgs) Handles ButtonBuscar.Click, ButtonBuscar.Click
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query = "SELECT v.ID, c.Cliente, v.Fecha, v.Total " &
                                   "FROM ventas v " &
@@ -47,7 +47,7 @@ Public Class BuscadorVentasFM
                 query &= " AND v.Total >= @Total"
             End If
 
-            Using cmd As New MySqlCommand(query, conn)
+            Using cmd As New SqlCommand(query, conn)
                 If ComboClientes.SelectedIndex > -1 Then
                     cmd.Parameters.AddWithValue("@IDCliente", ComboClientes.SelectedValue)
                 End If
@@ -61,7 +61,7 @@ Public Class BuscadorVentasFM
                     cmd.Parameters.AddWithValue("@Total", Decimal.Parse(TextBoxTotal.Text))
                 End If
 
-                Using adapter As New MySqlDataAdapter(cmd)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable
                     adapter.Fill(table)
                     DataGridViewVentas.DataSource = table
@@ -81,15 +81,15 @@ Public Class BuscadorVentasFM
 
     ' Método para cargar los productos asociados a la venta seleccionada
     Private Sub CargarDetallesVenta(ventaID As Integer)
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT p.Nombre, vi.PrecioUnitario, vi.Cantidad, vi.PrecioTotal " &
                                   "FROM ventasitems vi " &
                                   "INNER JOIN productos p ON vi.IDProducto = p.ID " &
                                   "WHERE vi.IDVenta = @IDVenta"
-            Using cmd As New MySqlCommand(query, conn)
+            Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@IDVenta", ventaID)
-                Using adapter As New MySqlDataAdapter(cmd)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable()
                     adapter.Fill(table)
                     DataGridViewDetalles.DataSource = table

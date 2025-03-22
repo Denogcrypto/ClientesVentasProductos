@@ -1,18 +1,18 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class VentasDB
 
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
     ' Método para obtener todas las ventas
     Public Function ObtenerVentas() As DataTable
         Dim table As New DataTable()
 
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT v.ID, c.Cliente, v.Fecha, v.Total FROM ventas v INNER JOIN clientes c ON v.IDCliente = c.ID"
-            Using cmd As New MySqlCommand(query, conn)
-                Using adapter As New MySqlDataAdapter(cmd)
+            Using cmd As New SqlCommand(query, conn)
+                Using adapter As New SqlDataAdapter(cmd)
                     adapter.Fill(table)
                 End Using
             End Using
@@ -23,21 +23,21 @@ Public Class VentasDB
 
     ' Método para eliminar una venta y sus items
     Public Sub EliminarVenta(ventaID As Integer)
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
-            Dim transaction As MySqlTransaction = conn.BeginTransaction()
+            Dim transaction As SqlTransaction = conn.BeginTransaction()
 
             Try
                 ' Eliminar los items de la venta (detalle)
                 Dim queryDetalle As String = "DELETE FROM ventasitems WHERE IDVenta = @IDVenta"
-                Using cmdDetalle As New MySqlCommand(queryDetalle, conn, transaction)
+                Using cmdDetalle As New SqlCommand(queryDetalle, conn, transaction)
                     cmdDetalle.Parameters.AddWithValue("@IDVenta", ventaID)
                     cmdDetalle.ExecuteNonQuery()
                 End Using
 
                 ' Eliminar la venta
                 Dim queryVenta As String = "DELETE FROM ventas WHERE ID = @ID"
-                Using cmdVenta As New MySqlCommand(queryVenta, conn, transaction)
+                Using cmdVenta As New SqlCommand(queryVenta, conn, transaction)
                     cmdVenta.Parameters.AddWithValue("@ID", ventaID)
                     cmdVenta.ExecuteNonQuery()
                 End Using

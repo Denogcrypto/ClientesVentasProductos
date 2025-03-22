@@ -14,6 +14,14 @@
         Me.Categoria = Categoria
     End Sub
 
+    Public Sub New(Nombre As String, Precio As Decimal, Categoria As String)
+        Me.Nombre = Nombre
+        Me.Precio = Precio
+        Me.Categoria = Categoria
+    End Sub
+
+
+
     Public Sub New(text As String)
         Me.text = text
     End Sub

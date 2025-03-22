@@ -12,6 +12,15 @@
         Me.Correo = Correo
     End Sub
 
+    Public Sub New(Nombre As String, Telefono As String, Correo As String)
+
+        Me.Nombre = Nombre
+        Me.Telefono = Telefono
+        Me.Correo = Correo
+    End Sub
+
+
+
     Public Sub New(text As String)
         Me.text = text
     End Sub

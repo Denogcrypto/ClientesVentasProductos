@@ -1,8 +1,8 @@
 ﻿Imports System.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class BuscarProductosFM
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Agregar elementos al ComboBox
@@ -28,20 +28,20 @@ Public Class BuscarProductosFM
 
         Dim valorBusqueda As String = "%" & TextBoxProducto.Text & "%"
 
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             Try
                 conn.Open()
-                Using cmd As New MySqlCommand(query, conn)
+                Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@valor", valorBusqueda)
 
                     ' Llenar el DataGridView
-                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    Using reader As SqlDataReader = cmd.ExecuteReader()
                         Dim dt As New DataTable()
                         dt.Load(reader)
                         DataGridViewProducto.DataSource = dt
                     End Using
                 End Using
-            Catch ex As MySqlException
+            Catch ex As SqlException
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End Using

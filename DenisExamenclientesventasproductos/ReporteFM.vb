@@ -1,19 +1,19 @@
 ﻿Imports System.Configuration
 Imports ClosedXML.Excel
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class ReporteFM
-    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexionMySQL").ConnectionString
+    Private connectionString As String = ConfigurationManager.ConnectionStrings("MiConexion").ConnectionString
 
     ' Método para generar el reporte de ventas
     Private Sub GenerarReporteVentas()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT v.ID, c.Cliente, v.Fecha, v.Total " &
                                   "FROM ventas v " &
                                   "INNER JOIN clientes c ON v.IDCliente = c.ID"
-            Using cmd As New MySqlCommand(query, conn)
-                Using adapter As New MySqlDataAdapter(cmd)
+            Using cmd As New SqlCommand(query, conn)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable()
                     adapter.Fill(table)
 
@@ -51,11 +51,11 @@ Public Class ReporteFM
 
     ' Método para generar el reporte de productos
     Private Sub GenerarReporteProductos()
-        Using conn As New MySqlConnection(connectionString)
+        Using conn As New SqlConnection(connectionString)
             conn.Open()
             Dim query As String = "SELECT ID, Nombre, Precio, Categoria FROM productos"
-            Using cmd As New MySqlCommand(query, conn)
-                Using adapter As New MySqlDataAdapter(cmd)
+            Using cmd As New SqlCommand(query, conn)
+                Using adapter As New SqlDataAdapter(cmd)
                     Dim table As New DataTable()
                     adapter.Fill(table)
 

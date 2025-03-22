@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports DocumentFormat.OpenXml.Drawing
 Imports MongoDB.Driver.Core.Configuration
-Imports MySql.Data.MySqlClient
+Imports Microsoft.Data.SqlClient
 
 Public Class ModificarProductosFM
 
