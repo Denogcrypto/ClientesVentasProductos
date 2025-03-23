@@ -73,6 +73,7 @@ Partial Class BuscarClientesFM
         ' dataGridViewClientes
         ' 
         dataGridViewClientes.Anchor = AnchorStyles.None
+        dataGridViewClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dataGridViewClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dataGridViewClientes.Location = New Point(164, 231)
         dataGridViewClientes.Name = "dataGridViewClientes"
@@ -89,7 +90,7 @@ Partial Class BuscarClientesFM
         Label2.TabIndex = 5
         Label2.Text = "Si conoce el dato, ingréselo. En caso contrario, una vez seleccionada la opción, presione Buscar"
         ' 
-        ' Form9
+        ' BuscarClientesFM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
@@ -101,7 +102,7 @@ Partial Class BuscarClientesFM
         Controls.Add(txtBuscar)
         Controls.Add(Label1)
         Controls.Add(ComboBox1)
-        Name = "Form9"
+        Name = "BuscarClientesFM"
         StartPosition = FormStartPosition.CenterScreen
         Text = "BuscarClientes"
         CType(dataGridViewClientes, ComponentModel.ISupportInitialize).EndInit()
