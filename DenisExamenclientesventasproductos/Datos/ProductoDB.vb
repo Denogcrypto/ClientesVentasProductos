@@ -88,7 +88,7 @@ Friend Class ProductoDB
 
     Friend Function ActualizarProducto(ModProduct As Producto) As Boolean
         ' Consulta SQL para actualizar los datos
-        Dim query As String = "UPDATE productos SET ID = @ID, Nombre = @Nombre, Precio = @Precio, Categoria = @Categoria WHERE ID = @ID"
+        Dim query As String = "UPDATE Productos SET Nombre = @Nombre, Precio = @Precio, Categoria = @Categoria WHERE ID = @ID"
 
         Using conn As New SqlConnection(connectionString)
             Try
@@ -117,3 +117,6 @@ Friend Class ProductoDB
         End Using
     End Function
 End Class
+
+
+
